@@ -13,21 +13,21 @@ Run _bundle install_ to install the dependencies in the Gemfile file.
 USAGE
 ======
 
-ruby lognit_rest.rb -h  
+    ruby lognit_rest.rb -h  
 
-Usage: lognit_rest.rb [OPTIONS]  
-Abstract description of script  
+    Usage: lognit_rest.rb [OPTIONS]  
+    Abstract description of script  
   
-  -l, --login=val                  Lognit login  
-  -p, --password=val               Login password  
-  -u, --lognit_url                 Lognit url. Default.: localhost  
-  -d, --delete_all_groups          Delete all groups  
-  -c, --create_all_groups          Create a group  
-  -s, --stat                       Get usage statistics  
-  -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com  
-  -t, --import-team=val            Set a team for a user.  
+      -l, --login=val                  Lognit login  
+      -p, --password=val               Login password  
+      -u, --lognit_url                 Lognit url. Default.: localhost  
+      -d, --delete_all_groups          Delete all groups  
+      -c, --create_all_groups          Create a group  
+      -s, --stat                       Get usage statistics  
+      -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com  
+      -t, --import-team=val            Set a team for a user.  
   
-  -h, --help                       Show this help message.  
+      -h, --help                       Show this help message.  
 
 EXAMPLES
 ========
@@ -36,17 +36,19 @@ EXAMPLES
 
 You can create users in batch. For this, create a file like the following example:  
   
-Luiz Guilherme Pais dos Santos:teste1@a.com  
-Gustavo Guimaraes:teste2@a.com  
-Gustavo Souza da Luz:teste3@a.com  
-Danilo Moura do Nascimento:teste4@a.com  
-Rubens Neto:teste4@a.com  
+    Luiz Guilherme Pais dos Santos:teste1@a.com  
+    Gustavo Guimaraes:teste2@a.com  
+    Gustavo Souza da Luz:teste3@a.com  
+    Danilo Moura do Nascimento:teste4@a.com  
+    Rubens Neto:teste4@a.com  
   
 Then, run the following code:  
-cat times/busca.txt | while read line; do ruby lognit_rest.rb -l someuser@corp.globo.com -p 123456 -u localhost -i "${line}"; done
+  
+
+    cat times/busca.txt | while read line; do ruby lognit_rest.rb -l someuser@corp.globo.com -p 123456 -u localhost -i "${line}"; done
 
 ## Get Stats ##
 
-ruby lognit_rest.rb -l someuser@corp.globo.com -p 123456 -u localhost -s  
+    ruby lognit_rest.rb -l someuser@corp.globo.com -p 123456 -u localhost -s  
   
   
