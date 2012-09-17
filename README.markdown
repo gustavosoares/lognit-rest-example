@@ -18,16 +18,18 @@ USAGE
     Usage: lognit_rest.rb [OPTIONS]  
     Abstract description of script  
   
-      -l, --login=val                  Lognit login  
-      -p, --password=val               Login password  
-      -u, --lognit_url                 Lognit url. Default.: localhost  
-      -d, --delete_all_groups          Delete all groups  
-      -c, --create_all_groups          Create a group  
-      -s, --stat                       Get usage statistics  
-      -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com  
-      -t, --import-team=val            Set a team for a user.  
-  
-      -h, --help                       Show this help message.  
+    -l, --login=val                  Lognit login
+    -p, --password=val               Login password
+    -u, --lognit_url                 Lognit url. Default.: localhost
+    -d, --delete_all_groups          Delete all groups
+    -c, --create_all_groups          Create a group
+    -s, --stat                       Get usage statistics
+    -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com
+    -t, --import-team=val            Set a tem for a user.
+        --export-group=val
+                                     Exports a group to disk.
+
+    -h, --help                       Show this help message.
 
 EXAMPLES
 ========
@@ -51,4 +53,7 @@ Then, run the following code:
 
     ruby lognit_rest.rb -l someuser@corp.globo.com -p 123456 -u localhost -s  
   
+## Export group ##
+
+    ruby lognit_rest.rb -l gustavosouza@corp.globo.com -p 111111 -u localhost --export-group=abc
   
