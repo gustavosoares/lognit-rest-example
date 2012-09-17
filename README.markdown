@@ -55,5 +55,7 @@ Then, run the following code:
   
 ## Export group ##
 
+If the group is found, then a text file will be written to /tmp/[group name].export
+
     ruby lognit_rest.rb -l gustavosouza@corp.globo.com -p 111111 -u localhost --export-group=abc
   
