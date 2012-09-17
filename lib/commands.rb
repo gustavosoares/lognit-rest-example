@@ -29,6 +29,25 @@ module Lognit
       response = lognit_client.post({:email => email, :displayName => fullname})
     end
     
+    def self.command_export_group(lognit_client)
+      group_name = OPTIONS[:export_group]
+      puts "--- EXPORTING GROUP #{group_name} ---"
+      lognit_client.url = RESOURCES[:group]
+      groups_json = lognit_client.get
+      groups = groups_json["data"]
+      group_ = nil
+      groups.each do |data|
+        if data["name"] == group_name
+          group_ = data
+          puts group_.inspect
+          puts '------'
+          filename = "/tmp/#{group_name}.export"
+          File.open(filename, 'w') {|f| f.write(group_.inspect) }
+          puts "File #{filename} has been written to disk."
+        end
+      end
+    end
+    
     def self.command_importa_time(lognit_client)
       puts "--- IMPORT TEAM ---"
       lognit_client.url = RESOURCES[:team]

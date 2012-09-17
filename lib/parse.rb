@@ -2,22 +2,25 @@ require 'optparse'
 
 # default options
 OPTIONS = {
-  :login       => nil,
-  :password     => nil,
-  :lognit_url  => "localhost",
+  :login             => nil,
+  :password          => nil,
+  :lognit_url        => "localhost",
   :delete_all_groups => nil,
   :create_all_groups => nil,
-  :stats => nil,
+  :stats             => nil,
+
 }
 
 # resource uris
 RESOURCES = {
-  :group => "/rest/log-groups",
-  :login => "/rest/users/welcome",
-  :user => "/rest/users",
-  :team => "/rest/teams",
-  :stats => "/rest/stats",
-  :index => "",
+  :group  => "/rest/log-groups",
+  :login  => "/rest/users/welcome",
+  :user   => "/rest/users",
+  :team   => "/rest/teams",
+  :stats  => "/rest/stats",
+  :spaces => "/rest/spaces",
+  :index  => "",
+
 }
 
 def parse
@@ -60,6 +63,10 @@ def parse
     
     option.on("-t", "--import-team=val", String, "Set a tem for a user.") do |a|
       OPTIONS[:import_team] = a
+    end
+    
+    option.on("", "--export-group=val", String, "Exports a group to disk.") do |a|
+      OPTIONS[:export_group] = a
     end
     
     option.separator ""

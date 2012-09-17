@@ -64,6 +64,9 @@ if OPTIONS[:import_team]
   Lognit::Command.command_importa_time(lognit_client)
 end
 
+if OPTIONS[:export_group]
+  Lognit::Command.command_export_group(lognit_client)
+end
 
 
 
