@@ -61,7 +61,7 @@ def parse
       OPTIONS[:import_user] = user
     end
     
-    option.on("-t", "--import-team=val", String, "Set a tem for a user.") do |a|
+    option.on("-t", "--import-team=val", String, "Set a team for a user.") do |a|
       OPTIONS[:import_team] = a
     end
     

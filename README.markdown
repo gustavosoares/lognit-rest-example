@@ -25,7 +25,7 @@ USAGE
     -c, --create_all_groups          Create a group
     -s, --stat                       Get usage statistics
     -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com
-    -t, --import-team=val            Set a tem for a user.
+    -t, --import-team=val            Set a team for a user.
         --export-group=val
                                      Exports a group to disk.
 
