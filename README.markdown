@@ -15,21 +15,23 @@ USAGE
 
     ruby lognit_rest.rb -h  
 
-    Usage: lognit_rest.rb [OPTIONS]  
-    Abstract description of script  
-  
-    -l, --login=val                  Lognit login
-    -p, --password=val               Login password
-    -u, --lognit_url                 Lognit url. Default.: localhost
-    -d, --delete_all_groups          Delete all groups
-    -c, --create_all_groups          Create a group
-    -s, --stat                       Get usage statistics
-    -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com
-    -t, --import-team=val            Set a team for a user.
-        --export-group=val
-                                     Exports a group to disk.
+    Usage: lognit_rest.rb [OPTIONS]
+    Abstract description of script
 
-    -h, --help                       Show this help message.
+      -l, --login=val                  Lognit login
+      -p, --password=val               Login password
+      -u, --lognit_url                 Lognit url. Default.: localhost
+      -d, --delete_all_groups          Delete all groups
+      -c, --create_groups              Create a group
+      -s, --stat                       Get usage statistics
+      -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com
+      -t, --import-team=val            Set a team for a user.
+          --export-group=val
+                                       Exports a group to disk. Val is the group name to export.
+          --import-group=val
+                                       Import a group to disk. Val is the exported group or a path with exported files.
+
+      -h, --help                       Show this help message.
 
 EXAMPLES
 ========

@@ -44,7 +44,7 @@ if OPTIONS[:delete_all_groups]
   end
 end
 
-if OPTIONS[:create_all_groups]
+if OPTIONS[:create_groups]
   lognit_client.url = RESOURCES[:group]
   (1..5).each do |n|
      puts "Criando grupo: #{n}"
@@ -68,6 +68,9 @@ if OPTIONS[:export_group]
   Lognit::Command.command_export_group(lognit_client)
 end
 
+if OPTIONS[:import_group]
+  Lognit::Command.command_import_group(lognit_client)
+end
 
 
 

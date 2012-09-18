@@ -47,11 +47,13 @@ module Lognit
     def post(data)
       @response = @client["#{@url}"].post data.to_json, @args
       print_response()
+      return @response
     end
     
     def delete(delete_url)
       @response = @client["#{delete_url}"].delete @args
       print_response()
+      return @response
     end
     
     def list_groups

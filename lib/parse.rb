@@ -6,7 +6,7 @@ OPTIONS = {
   :password          => nil,
   :lognit_url        => "localhost",
   :delete_all_groups => nil,
-  :create_all_groups => nil,
+  :create_groups => nil,
   :stats             => nil,
 
 }
@@ -49,8 +49,8 @@ def parse
       OPTIONS[:delete_all_groups] = :delete_all_groups
     end
     
-    option.on("-c", "--create_all_groups", String, "Create a group") do |c|
-      OPTIONS[:create_all_groups] = :create_all_groups
+    option.on("-c", "--create_groups", String, "Create a group") do |c|
+      OPTIONS[:create_groups] = :create_groups
     end
     
     option.on("-s", "--stat", String, "Get usage statistics") do |s|
@@ -65,8 +65,12 @@ def parse
       OPTIONS[:import_team] = a
     end
     
-    option.on("", "--export-group=val", String, "Exports a group to disk.") do |a|
+    option.on("", "--export-group=val", String, "Exports a group to disk. Val is the group name to export.") do |a|
       OPTIONS[:export_group] = a
+    end
+    
+    option.on("", "--import-group=val", String, "Import a group to disk. Val is the exported group or a path with exported files.") do |a|
+      OPTIONS[:import_group] = a
     end
     
     option.separator ""

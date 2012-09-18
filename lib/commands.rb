@@ -29,6 +29,50 @@ module Lognit
       response = lognit_client.post({:email => email, :displayName => fullname})
     end
     
+    #{"id":null,"name":"teste","spaces":[],"simulationBtnText":"Simular busca por este grupo","metadata":[],"templates":[],"patterns":[],"filters":[]}
+    def self.command_import_group(lognit_client)
+      path = OPTIONS[:import_group]
+      puts "--- IMPORTING GROUP #{path} ---"
+      groups = []
+      if File.directory?(path)
+        puts "importing files from directory #{path}"
+        puts "TODO"
+      else
+        puts "\nimport group from file #{path}\n\n"
+        file = File.new(path, "r")
+        content = file.gets
+        file.close
+        #convert string to hash
+        data = eval(content)
+  
+        #empty space
+        data["spaces"]                       = []
+        #remove ids
+        data["id"]                           = nil
+        data["filters"].each do |filter|
+          filter["id"] = nil
+          filter["expressions"].each do |expression|
+            expression["id"] = nil
+          end
+        end
+
+        groups << data
+      end
+      lognit_client.url = RESOURCES[:group]
+      group_ = nil
+      groups.each do |data|
+        puts "Creating group #{data.inspect}"
+        puts "------"
+        begin
+          response = lognit_client.post(data)
+        rescue => e
+          if e.http_code and e.http_code == 403
+            puts "Ops... group #{data['name']} already exists..."
+          end
+        end
+      end
+    end
+    
     def self.command_export_group(lognit_client)
       group_name = OPTIONS[:export_group]
       puts "--- EXPORTING GROUP #{group_name} ---"
@@ -78,10 +122,6 @@ module Lognit
           puts '------'
         end
       end
-      # teams_json.each do |k,v|
-      #   puts v.inspect
-      #   puts '-----'
-      # end
     end
     
   end
