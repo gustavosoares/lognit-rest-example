@@ -35,8 +35,17 @@ module Lognit
       puts "--- IMPORTING GROUP #{path} ---"
       groups = []
       if File.directory?(path)
-        puts "importing files from directory #{path}"
-        puts "TODO"
+        puts "\nimporting files from directory #{path}\n\n"
+        Dir.foreach(path) { |x| 
+          unless x =~ /^\./
+            file = File.new(path + "/" + x, "r")
+            content = file.gets
+            file.close
+            #convert string to hash
+            data = eval(content)
+            groups << data
+          end
+        }
       else
         puts "\nimport group from file #{path}\n\n"
         file = File.new(path, "r")
@@ -44,7 +53,13 @@ module Lognit
         file.close
         #convert string to hash
         data = eval(content)
-  
+        groups << data
+      end
+      lognit_client.url = RESOURCES[:group]
+      group_ = nil
+      groups.each do |data|
+        #sanatize first...
+        
         #empty space
         data["spaces"]                       = []
         #remove ids
@@ -55,12 +70,7 @@ module Lognit
             expression["id"] = nil
           end
         end
-
-        groups << data
-      end
-      lognit_client.url = RESOURCES[:group]
-      group_ = nil
-      groups.each do |data|
+        
         puts "Creating group #{data.inspect}"
         puts "------"
         begin
