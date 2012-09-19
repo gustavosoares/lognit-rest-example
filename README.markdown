@@ -92,11 +92,11 @@ Sample configuration for log4j
 _OBS: For log4j versions prior to 1.2.15 is necessary to put the hostname parameter before MY-APPLICATION._
 
 
-# No Python
+# Python
 
 RTFM: http://docs.python.org/library/logging.handlers.html#sysloghandler
 
-## Exemplo:
+## Example:
 
     import logging
     from logging.handlers import SysLogHandler
@@ -218,7 +218,7 @@ Append to the handler (syslogHandler), formatters(syslogFormatter) and logger_ro
     handlers=watchedFileHandler,syslogHandler
 
 
-# No Apache
+# Apache
 
 You can customize log format to save some bytes...
 
@@ -232,7 +232,7 @@ Then, in your virtual host section.
     CustomLog "|/bin/logger -t httpd-<PRODUTO> -p local6.info" lognit_combined
 
 
-# No Ngnix
+# Ngnix
 
 You will need to apply a patch do nginx, so that it can log to syslog. Reference: https://github.com/yaoweibin/nginx_syslog_patch
 
