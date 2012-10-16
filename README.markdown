@@ -24,7 +24,8 @@ USAGE
       -d, --delete_all_groups          Delete all groups
       -c, --create_groups              Create a group
       -s, --stat                       Get usage statistics
-      -i, --import-user=val            Create an user. Specify the username and its email separated by ":" Ex: teste:teste@corp.globo.com
+      -i, --import-user=val            Create an user. Specify the username and its email separated by ":" 
+                                         Ex: teste:teste@corp.globo.com
       -t, --import-team=val            Set a team for a user.
           --export-group=val
                                        Exports a group to disk. Val is the group name to export.
@@ -46,10 +47,17 @@ You can create users in batch. For this, create a file like the following exampl
     Danilo Moura do Nascimento:teste4@a.com  
     Rubens Neto:teste4@a.com  
   
-Then, run the following code:  
+Then, run the following command:  
   
-
     cat times/busca.txt | while read line; do ruby lognit_rest.rb -l someuser@corp.globo.com -p 123456 -u localhost -i "${line}"; done
+    
+## Associate a team for a use ##
+
+First you MUST create the users and the team that you wish to associate.
+
+Them, using the same text file used for create users in batch, run the following command:
+
+     cat j1.txt  | cut -d ":" -f 2 | while read line; do ruby lognit_rest.rb -l someuser@corp.globo.com -p 123456 -u localhost -t "${line}":jornalismo; done
 
 ## Get Stats ##
 
