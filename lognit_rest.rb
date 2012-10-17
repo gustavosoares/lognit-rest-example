@@ -20,8 +20,6 @@ def print_line
   puts "------------------------------------------------"
 end
 
-puts "OPTIONS: #{OPTIONS.inspect}"
-
 url = "#{OPTIONS[:lognit_url]}#{RESOURCES[:log_groups]}"
 
 puts "login:     #{OPTIONS[:login]}"

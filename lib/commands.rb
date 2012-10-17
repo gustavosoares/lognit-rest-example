@@ -2,6 +2,16 @@ module Lognit
   
   class Command
     
+    def self.command_get_user_info(lognit_client, email)
+      original_url = lognit_client.url
+      lognit_client.url = RESOURCES[:user] + "?filterExpr=#{email}"
+      puts "Getting user info at #{lognit_client.url} for the email #{email}"
+      data = lognit_client.get
+      puts "User info: #{data.inspect}"
+      lognit_client.url = original_url
+      return data
+    end
+    
     def self.command_stat(lognit_client)
       lognit_client.url = RESOURCES[:stats]
       puts "uri: #{lognit_client.url}"
@@ -122,15 +132,49 @@ module Lognit
       puts "fullname: #{fullname}"
       puts "email: #{email}"
       puts "team: #{team}"
+      
+      #get user data
+      user_data = Command.command_get_user_info(lognit_client, email)
+      
       teams_json = lognit_client.get
       teams = teams_json["data"]
       team_ = nil
-      teams.each do |data|
-        if data["name"] == team
-          team_ = data
-          puts team_.inspect
-          puts '------'
+      if user_data
+        teams.each do |data|
+          if data["name"] == team
+            team_ = data
+            puts "team objetc: #{team_.inspect}"
+            team_id = team_["id"]
+            puts "team id: #{team_id}"
+
+            puts "team members: #{team_["members"].inspect}"
+            is_associated = false
+            team_["members"].each do |member|
+              is_associated = true if member["email"] == email
+            end
+            unless is_associated
+              team_["members"] << {"name" => user_data["data"][0]["displayName"], "id" => user_data["data"][0]["id"], "email" => user_data["data"][0]["email"]}
+              puts "team members: #{team_["members"].inspect}"
+              puts "Updating team"
+              puts "------"
+              lognit_client.url = RESOURCES[:team] + "/" + team_id
+              puts "url: #{lognit_client.url}"
+              begin
+                response = lognit_client.put(team_)
+              rescue => e
+                puts "Opss... #{e}"
+                # if e.http_code and e.http_code == 403
+                #   puts "Ops... group #{data['name']} already exists..."
+                # end
+              end
+              break
+            else
+              puts "User #{email} is already associated to the team #{team}"
+            end
+          end
         end
+      else
+        puts "User data for #{email} not found!"
       end
     end
     
