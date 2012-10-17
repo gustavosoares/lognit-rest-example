@@ -50,6 +50,12 @@ module Lognit
       return @response
     end
     
+    def put(data)
+      @response = @client["#{@url}"].put data.to_json, @args
+      print_response()
+      return @response
+    end
+    
     def delete(delete_url)
       @response = @client["#{delete_url}"].delete @args
       print_response()
