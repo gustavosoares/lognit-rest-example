@@ -27,14 +27,17 @@ module Lognit
       #puts stats.inspect
       puts "****************"
       puts "Total Messages: #{stats['total_messages']}"
+      total_queries = 0
       stats["per_nodes"].each do |item|
         puts item["node"]
         total_bytes = item["total_bytes"] / (1024 * 1024 * 1024)
         count_queries = item["queries"].count
+        total_queries = total_queries + count_queries
         puts "\ttotal_bytes: #{total_bytes} GB"
         puts "\tqueries: #{count_queries}"
       end
-
+      puts "Total Queries: #{total_queries}"
+      
     end
     
     def self.command_importa_usuario(lognit_client)
