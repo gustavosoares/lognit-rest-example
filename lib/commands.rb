@@ -20,23 +20,37 @@ module Lognit
     end
     
     def self.report(lognit_client)
+      # key: total_messages
+      # key: message_rate
+      # key: total_docs
+      # key: byte_rate
+      # key: total_bytes
+      # key: per_nodes
+      # key: queries
+      # key: nodes
+      # key: missing
+      
       lognit_client.url = RESOURCES[:stats]
       puts "uri: #{lognit_client.url}"
       stats = lognit_client.get
       puts "****************"
-      #puts stats.inspect
-      puts "****************"
-      puts "Total Messages: #{stats['total_messages']}"
-      total_queries = 0
-      stats["per_nodes"].each do |item|
-        puts item["node"]
-        total_bytes = item["total_bytes"] / (1024 * 1024 * 1024)
-        count_queries = item["queries"].count
-        total_queries = total_queries + count_queries
-        puts "\ttotal_bytes: #{total_bytes} GB"
-        puts "\tqueries: #{count_queries}"
-      end
-      puts "Total Queries: #{total_queries}"
+      puts "Total Messages: #{stats['total_messages'] / 1000000} millions"
+      puts "total_docs: #{stats['total_docs'] / 1000000} millions"
+      puts "nodes: #{stats['nodes'].count}"
+      puts "queries: #{stats['queries'].count}"
+      # total_queries = 0
+      # stats.each do |key, value|
+      #   puts "key: #{key}"
+      # end
+      # stats["per_nodes"].each do |item|
+      #   puts item["node"]
+      #   total_bytes = item["total_bytes"] / (1024 * 1024 * 1024)
+      #   count_queries = item["queries"].count
+      #   total_queries = total_queries + count_queries
+      #   puts "\ttotal_bytes: #{total_bytes} GB"
+      #   puts "\tqueries: #{count_queries}"
+      # end
+      # puts "Total Queries: #{total_queries}"
       
     end
     
