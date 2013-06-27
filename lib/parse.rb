@@ -53,6 +53,10 @@ def parse
       OPTIONS[:create_groups] = :create_groups
     end
     
+    option.on("-r", "--report", String, "Get nice report") do |s|
+      OPTIONS[:report] = :report
+    end
+    
     option.on("-s", "--stat", String, "Get usage statistics") do |s|
       OPTIONS[:stats] = :stats
     end

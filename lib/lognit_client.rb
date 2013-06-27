@@ -16,7 +16,7 @@ module Lognit
   
     def login
       #RestClient.log.debug("---> Login")
-      pp("---> Login")
+      #pp("---> Login")
       @client = RestClient::Resource.new(@url, @login, @password)
       @response = @client['/login'].get
     
@@ -29,9 +29,9 @@ module Lognit
   
     def print_response
       unless @response.nil?
-        pp @response.code
-        pp @response.headers
-        pp @response.cookies
+        # pp @response.code
+        # pp @response.headers
+        # pp @response.cookies
       else
         pp "No response found"
       end

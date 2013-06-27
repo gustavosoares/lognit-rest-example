@@ -19,6 +19,24 @@ module Lognit
       puts stats.inspect
     end
     
+    def self.report(lognit_client)
+      lognit_client.url = RESOURCES[:stats]
+      puts "uri: #{lognit_client.url}"
+      stats = lognit_client.get
+      puts "****************"
+      #puts stats.inspect
+      puts "****************"
+      puts "Total Messages: #{stats['total_messages']}"
+      stats["per_nodes"].each do |item|
+        puts item["node"]
+        total_bytes = item["total_bytes"] / (1024 * 1024 * 1024)
+        count_queries = item["queries"].count
+        puts "\ttotal_bytes: #{total_bytes} GB"
+        puts "\tqueries: #{count_queries}"
+      end
+
+    end
+    
     def self.command_importa_usuario(lognit_client)
       puts "--- IMPORT USER ---"
       lognit_client.url = RESOURCES[:user]

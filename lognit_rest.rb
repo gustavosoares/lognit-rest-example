@@ -70,5 +70,9 @@ if OPTIONS[:import_group]
   Lognit::Command.command_import_group(lognit_client)
 end
 
+if OPTIONS[:report]
+  Lognit::Command.report(lognit_client)
+end
+
 
 
