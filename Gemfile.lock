@@ -1,7 +1,7 @@
 GEM
   remote: http://rubygems.org/
   specs:
-    json (1.6.5)
+    json (2.3.0)
     mime-types (1.17.2)
     rest-client (1.6.7)
       mime-types (>= 1.16)
@@ -10,5 +10,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  json (= 1.6.5)
+  json (= 2.3.0)
   rest-client (= 1.6.7)
